@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <title>Unlock Content with Popunder</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      background: #111;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px 20px;
+    }
+    .box {
+      background: #1c1c1c;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,255,0,0.2);
+      max-width: 400px;
+      margin: auto;
+    }
+    h1 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+    #timer {
+      font-size: 20px;
+      color: #ffdd57;
+      margin-bottom: 20px;
+    }
+    #unlockBtn {
+      display: none;
+      padding: 12px 25px;
+      background-color: #28a745;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    #unlockBtn:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="box">
+    <h1>🔐 আপনার কনটেন্ট আনলক করতে ৫ সেকেন্ড অপেক্ষা করুন</h1>
+    <p id="timer">৫ সেকেন্ড অপেক্ষা করুন...</p>
+    <a id="unlockBtn" href="javascript:void(0)" target="_blank">✅ এখানে ক্লিক করুন</a>
+  </div>
+
+  <script>
+    let timeLeft = 5;
+    const timer = document.getElementById("timer");
+    const unlockBtn = document.getElementById("unlockBtn");
+
+    // Popunder ad and main content links
+    const popunderLink = "<script type='text/javascript' src='//pl27138583.profitableratecpm.com/34/7d/67/347d67738044416fb55a23126def84c6.js'></script>"; // Replace with your real popunder ad link
+    const mainContentLink = "https://otieu.com/4/9549476"; // Replace with your main content link
+
+    // Countdown
+    const countdown = setInterval(() => {
+      timer.innerText = `${timeLeft} সেকেন্ড অপেক্ষা করুন...`;
+      timeLeft--;
+      if (timeLeft < 0) {
+        clearInterval(countdown);
+        timer.style.display = "none";
+        unlockBtn.style.display = "inline-block";
+      }
+    }, 1000);
+
+    // Open ad and redirect
+    function openAd() {
+      window.open(popunderLink, "_blank");
+      window.location.href = mainContentLink;
+    }
+
+    unlockBtn.addEventListener("click", openAd);
+
+    // Auto redirect fallback
+    setTimeout(() => {
+      window.location.href = popunderLink;
+    }, 12000);
+  </script>
+
+  <!-- ✅ Your ProfitablerateCPM ad script -->
+  <script type='text/javascript' src='//pl27138583.profitableratecpm.com/34/7d/67/347d67738044416fb55a23126def84c6.js'></script>
+
+</body>
+</html>
