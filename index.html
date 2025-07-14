@@ -52,7 +52,7 @@
   <div class="box">
     <h1>🔐 আপনার কনটেন্ট আনলক করতে ৫ সেকেন্ড অপেক্ষা করুন</h1>
     <p id="timer">৫ সেকেন্ড অপেক্ষা করুন...</p>
-    <a id="unlockBtn" href="javascript:void(0)" target="_blank">✅ এখানে ক্লিক করুন</a>
+    <button id="unlockBtn">✅ এখানে ক্লিক করুন</button>
   </div>
 
   <script>
@@ -61,14 +61,15 @@
     const unlockBtn = document.getElementById("unlockBtn");
 
     // Popunder ad and main content links
-    const popunderLink = "<script type='text/javascript' src='//pl27138583.profitableratecpm.com/34/7d/67/347d67738044416fb55a23126def84c6.js'></script>"; // Replace with your real popunder ad link
+    const popunderLink = "<script type='text/javascript' src='//pl27138583.profitableratecpm.com/34/7d/67/347d67738044416fb55a23126def84c6.js'></script>"; // Replace with your real popunder URL
     const mainContentLink = "https://otieu.com/4/9549476"; // Replace with your main content link
 
     // Countdown
     const countdown = setInterval(() => {
-      timer.innerText = `${timeLeft} সেকেন্ড অপেক্ষা করুন...`;
       timeLeft--;
-      if (timeLeft < 0) {
+      timer.innerText = `${timeLeft} সেকেন্ড অপেক্ষা করুন...`;
+      
+      if (timeLeft <= 0) {
         clearInterval(countdown);
         timer.style.display = "none";
         unlockBtn.style.display = "inline-block";
@@ -77,19 +78,25 @@
 
     // Open ad and redirect
     function openAd() {
-      window.open(popunderLink, "_blank");
+      try {
+        window.open(popunderLink, "_blank");
+      } catch (e) {
+        console.error("Popunder failed:", e);
+      }
       window.location.href = mainContentLink;
     }
 
     unlockBtn.addEventListener("click", openAd);
 
-    // Auto redirect fallback
+    // Auto redirect fallback (if user doesn't click)
     setTimeout(() => {
-      window.location.href = popunderLink;
+      if (unlockBtn.style.display === "none") {
+        window.location.href = popunderLink;
+      }
     }, 12000);
   </script>
 
-  <!-- ✅ Your ProfitablerateCPM ad script -->
+  <!-- ✅ Your ProfitablerateCPM ad script (only include once) -->
   <script type='text/javascript' src='//pl27138583.profitableratecpm.com/34/7d/67/347d67738044416fb55a23126def84c6.js'></script>
 
 </body>
